@@ -1,18 +1,39 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.main-container{
+    margin-top: 5rem;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+ion-icon {
+    font-size: 32px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+
+/*Home css*/
+
+.card-custom {
+    margin-top:2rem;
+    height: 150px;
+    width: 100%;
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
+.card-products {
+    background-color: #D9114A
+}
+
+.card-orders {
+    background-color: #00B79F;
+}
+
+.card-clients {
+    background-color: #01689C;
+}
+
+.card-custom:hover{
+    box-shadow: 0px 0px 10px #808080;
+}
