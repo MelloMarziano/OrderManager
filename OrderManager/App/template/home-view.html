@@ -7,11 +7,12 @@
     </div>
     <div class="row">
         <div class="col-12 col-sm-4">
-            <div class=" card-custom card-products">
+            <a class=" card-custom card-products" href="#/Product">
                 <ion-icon name="pricetag-outline"></ion-icon>
                 <h4>Productos</h4>
+                
 
-            </div>
+            </a>
         </div>
 
         <div class="col-12 col-sm-4">
@@ -45,12 +46,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="i in data">
+                    <tr ng-repeat="i in data track by $index">
                         <td></td>
                         <td>{{i.Id}}</td>
                         <td>{{i.ProductName}}</td>
                         <td>{{i.Stock}}</td>
-
                     </tr>
                 </tbody>
             </table>
