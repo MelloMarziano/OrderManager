@@ -38,19 +38,25 @@ namespace OrderManager.Controllers
         }).ToList();
             return Json(productos, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult SaveProduct()
+        [HttpPost]
+        public JsonResult SaveProduct(Product product, List<string> images)
         {
             var newProduct = new Product
             {
-                ProductName = "Camiseta Jack and Jones",
-                ProductDescription = "Esta es una descripcion corta",
-                Stock = 4,
-                Price = 99.99m,
-                Images = new List<Image>{
-                    new Image { FilePath = "https://img01.ztat.net/article/spp-media-p1/fb199d2a99f2399d90d6721904724c3f/3481b7ccef2641a1ad1a4670cc3df443.jpg?imwidth=762&filter=packshot" },
-                    new Image { FilePath = "https://img01.ztat.net/article/spp-media-p1/fb199d2a99f2399d90d6721904724c3f/3481b7ccef2641a1ad1a4670cc3df443.jpg?imwidth=762&filter=packshot" }
-                }
+                ProductName = product.ProductName,
+                ProductDescription = product.ProductDescription,
+                Stock = product.Stock,
+                Price = product.Price,
+                Images = new List<Image>()
+                //Images = new List<Image>{
+                //    new Image { FilePath = "https://img01.ztat.net/article/spp-media-p1/fb199d2a99f2399d90d6721904724c3f/3481b7ccef2641a1ad1a4670cc3df443.jpg?imwidth=762&filter=packshot" },
+                //    new Image { FilePath = "https://img01.ztat.net/article/spp-media-p1/fb199d2a99f2399d90d6721904724c3f/3481b7ccef2641a1ad1a4670cc3df443.jpg?imwidth=762&filter=packshot" }
+                //}
             };
+            foreach (var imageFilePath in images)
+            {
+                newProduct.Images.Add(new Image { FilePath = imageFilePath });
+            }
 
 
             // Agregar el producto al contexto de base de datos y guardar los cambios
@@ -59,7 +65,22 @@ namespace OrderManager.Controllers
 
             // El producto se ha agregado exitosamente a la base de datos
             Console.WriteLine("Producto agregado correctamente");
-            return Json(newProduct);
+            return Json(null);
+        }
+        [HttpPost]
+        public JsonResult Edit(Product product)
+        {
+            db.Entry(product).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(null);
+        }
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            var product = db.Products.Find(id);
+            db.Products.Remove(product);
+            db.SaveChanges();
+            return Json(null);
         }
 
     }

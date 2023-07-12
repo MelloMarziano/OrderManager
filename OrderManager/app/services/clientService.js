@@ -1,23 +1,21 @@
 ﻿(function () {
     angular.module('app')
-        .factory('productService', ['$http', '$q', function ($http, $q) {
+        .factory('clientService', ['$http', '$q', function ($http, $q) {
             var service = {};
 
-            service.getProducts = function () {
+            service.getClients = function () {
                 var deferred = $q.defer();
-                $http.get('/Product/GetProduct').then(function (result) {
-                    console.log(result);
+                $http.get('/Customer/GetClients').then(function (result) {
                     deferred.resolve(result.data);
                 }, function () {
-                    console.log('Error');
                     deferred.reject();
                 });
                 return deferred.promise;
             };
 
-            service.addProduct = function (product, images) {
+            service.addClient = function (client) {
                 var deferred = $q.defer();
-                $http.post('/Product/SaveProduct', product, images).then(function () {
+                $http.post('/Customer/SaveClient', client).then(function () {
                     deferred.resolve();
                 }, function () {
                     deferred.reject();
@@ -25,9 +23,9 @@
                 return deferred.promise;
             };
 
-            service.deleteProduct = function (id) {
+            service.deleteClient = function (id) {
                 var deferred = $q.defer();
-                $http.post('/Product/Delete', { id: id }).then(function () {
+                $http.post('/Customer/Delete', { id: id }).then(function () {
                     deferred.resolve();
                 }, function () {
                     deferred.reject();
@@ -35,16 +33,15 @@
                 return deferred.promise;
             };
 
-            service.editProduct = function (producto, images) {
+            service.editClient = function (client) {
                 var deferred = $q.defer();
-                $http.post('/Product/Edit', producto, images).then(function () {
+                $http.post('/Customer/Edit', client).then(function () {
                     deferred.resolve();
                 }, function () {
                     deferred.reject();
                 });
                 return deferred.promise;
             };
-
 
             return service;
         }]);

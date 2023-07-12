@@ -18,7 +18,7 @@ namespace OrderManager.Models.EF
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Customer> Clientes { get; set; }
         public DbSet<Product> Products { get; set; }
     }
 }

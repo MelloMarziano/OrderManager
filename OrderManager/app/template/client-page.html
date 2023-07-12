@@ -1,0 +1,105 @@
+﻿<div class="main-container">
+    <div class="row">
+        <div class="col-12">
+            <h3>{{title}}</h3>
+        </div>
+    </div>
+    <br />
+
+    <div class="row justify-content-between">
+        <div class="col">
+            <a href="#" class="btn btn-secondary"><ion-icon size="small" name="home-outline"></ion-icon> Volver a Home</a>
+        </div>
+        <div class="col text-right">
+            <button data-toggle="modal" data-target="#exampleModal" class="btn btn-info" ng-click="openModal()">Crear nuevo</button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id </th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="i in data | limitTo: itemsPerPage: (currentPage - 1) * itemsPerPage" ">
+                            
+                            <td>{{i.Id}}</td>
+                            <td>{{i.Name}}</td>
+                            <td>{{i.Email}}</td>
+                            <td>{{i.Phone}}</td>
+                            <td>
+                                <a data-toggle="modal" data-target="#exampleModal" ng-click="openForDetail(i)"><ion-icon size="small" class="text-primary" name="eye-outline"></ion-icon></a>
+                                <a data-toggle="modal" data-target="#exampleModal" ng-click="openForEdit(i)"><ion-icon size="small" class="text-warning" name="pencil-outline"></ion-icon></a>
+                                <a ng-click="deleteClient(i.Id)"><ion-icon size="small" class="text-danger" name="trash-outline"></ion-icon></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row justify-content-between">
+                <div class="col-6">
+                    <div class="pull-left">
+                        <br />
+                        <pre>Page: {{currentPage}}/{{numPages}}</pre>
+                    </div>
+                </div>
+                <div class="col-6 align-self-end">
+
+                    <ul uib-pagination direction-links="false" total-items="data.length" items-per-page="itemsPerPage" max-size="5" ng-model="currentPage" num-pages="numPages"></ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <h3>{{modalTitle}}</h3>
+                <form ng-submit="submitClient(formBuilder)">
+                    <input type="hidden" class="form-control" ng-model="formBuilder.Id" ng-disabled="disabledForm">
+                    <div class="form-group">
+                        <label>Nombre de cliente</label>
+                        <input type="text" class="form-control" ng-model="formBuilder.Name" ng-disabled="disabledForm">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" ng-model="formBuilder.Email" ng-disabled="disabledForm">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefono</label>
+                        <input type="tel" class="form-control" ng-model="formBuilder.Phone" ng-disabled="disabledForm">
+                    </div>
+                   
+                    
+                    
+                   
+
+                    <br />
+                    <div class="row justify-content-between">
+                        <div class="col align-self-start">
+                            <a class="btn btn-block btn-danger" data-dismiss="modal">Close</a>
+                        </div>
+                        <div class="col align-self-end">
+                            <button type="submit" class="btn btn-block btn-success" ng-if="!disabledForm">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

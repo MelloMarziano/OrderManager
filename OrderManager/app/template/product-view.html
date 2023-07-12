@@ -6,9 +6,11 @@
     </div>
     <br />
 
-    <div class="row text-right">
-        
+    <div class="row justify-content-between">
         <div class="col">
+            <a  href="#" class="btn btn-secondary"><ion-icon size="small" name="home-outline"></ion-icon> Volver a Home</a>
+        </div>
+        <div class="col text-right">
             <button data-toggle="modal" data-target="#exampleModal" class="btn btn-info" ng-click="openModal()">Crear nuevo</button>
         </div>
     </div>
@@ -37,9 +39,9 @@
                             <td>{{i.Stock}}</td>
                             <td>{{i.Price}}</td>
                             <td>
-                                <a data-toggle="modal" data-target="#exampleModal" ng-click="openForDetail(i)"><ion-icon class="text-primary" name="eye-outline"></ion-icon></a>
-                                <a data-toggle="modal" data-target="#exampleModal" ng-click="openForEdit(i)"><ion-icon class="text-warning" name="pencil-outline"></ion-icon></a>
-                                <a><ion-icon class="text-danger" name="trash-outline"></ion-icon></a>
+                                <a data-toggle="modal" data-target="#exampleModal" ng-click="openForDetail(i)"><ion-icon size="small" class="text-primary" name="eye-outline"></ion-icon></a>
+                                <a data-toggle="modal" data-target="#exampleModal" ng-click="openForEdit(i)"><ion-icon size="small" class="text-warning" name="pencil-outline"></ion-icon></a>
+                                <a ng-click="deleteProduct(i.ProductId)"><ion-icon size="small" class="text-danger" name="trash-outline"></ion-icon></a>
                             </td>
                         </tr>
                     </tbody>
@@ -69,7 +71,8 @@
             
             <div class="modal-body">
                 <h3>{{modalTitle}}</h3>
-                <form>
+                <form ng-submit="submitProduct(formBuilder)">
+                    <input type="hidden" class="form-control" ng-model="formBuilder.Id" ng-disabled="disabledForm">
                     <div class="form-group">
                         <label>Nombre de producto</label>
                         <input type="text" class="form-control" ng-model="formBuilder.ProductName" ng-disabled="disabledForm">
@@ -86,40 +89,49 @@
                         <label>Descripcion</label>
                         <textarea class="form-control" ng-model="formBuilder.ProductDescription" ng-disabled="disabledForm"></textarea>
                     </div>
-                    <div class="form-group" ng-repeat="image in formBuilder.Images  track by $index" ng-if="formBuilder.Images.length > 0">
+                    <!--<div class="form-group" ng-repeat="image in formBuilder.Images || [0, 1]  track by $index">
                         <label>Imagen</label>
-                        <div >
+                        <div>
                             <input type="text" class="form-control" ng-model="formBuilder.Images[$index]" ng-disabled="disabledForm">
                         </div>
-                        
-                    </div>
-                    <fieldset ng-repeat="row in rows" ng-if="formBuilder.Images <= 0">
+
+                    </div>-->
+                    <fieldset ng-repeat="row in rows" ng-if="!disabledForm">
                         <div class="form-group">
                             <label>Imagen</label>
                             <div class="row">
                                 <div class="col-10">
-                                    <input type="text" name="images[]" class="form-control" ng-model="formBuilder.Images[$index + 1]" />
+                                    <input type="text" name="images[]" class="form-control" ng-model="formBuilder.Images[$index]"  ng-disabled="disabledForm"/>
                                 </div>
-                                <div class="col-2">
+                                <div class="col-2" ng-if="!disabledForm">
                                     <ion-icon class="text-danger" ng-model="row.remove" ng-click="removeRow()" name="trash-outline"></ion-icon>
                                 </div>
                             </div>
                         </div>
                     </fieldset>
-                    <button type="button" name="add_more" class="btn btn-success" ng-click="addRow()">
-                        Nueva imagen
-                    </button>
+                    <div class="row"  ng-if="disabledForm">
+                        <div class="col-2" ng-repeat="row in rows">
+                            <img ng-src={{formBuilder.Images[$index]}} width="64" height="64" alt="Alternate Text" />
+                        </div>
+                    </div>
+
+                    <div class="row"  ng-if="!disabledForm">
+                        <div class="col">
+                            <a class="btn btn-info" ng-click="addRow()">Agregar imagen</a>
+                        </div>
+                    </div>
+                    
                     <br />
+                    <div class="row justify-content-between">
+                        <div class="col align-self-start">
+                            <a class="btn btn-block btn-danger" data-dismiss="modal">Close</a>
+                        </div>
+                        <div class="col align-self-end">
+                            <button type="submit" class="btn btn-block btn-success" ng-if="!disabledForm">Guardar</button>
+                        </div>
+                    </div>
                 </form>
-                <br />
-                <div class="row justify-content-between">
-                    <div class="col align-self-start">
-                        <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-                    <div class="col align-self-end">
-                        <button type="button" class="btn btn-block btn-success" ng-if="!disabledForm">Guardar</button>
-                    </div>
-                </div>
+                
             </div>
             
         </div>

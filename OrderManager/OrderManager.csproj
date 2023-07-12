@@ -99,10 +99,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\controllers\clientCtrl.js" />
     <Content Include="app\controllers\homeCtrl.js" />
     <Content Include="app\controllers\productCtrl.js" />
+    <Content Include="app\services\clientService.js" />
     <Content Include="app\services\homeService.js" />
     <Content Include="app\services\productService.js" />
+    <Content Include="app\template\client-page.html" />
     <Content Include="app\template\home-view.html" />
     <Content Include="app\template\modalProduct.html" />
     <Content Include="app\template\product-view.html" />
@@ -1015,6 +1018,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="dto\ProductDTO.cs" />
@@ -1041,10 +1045,16 @@
     <Compile Include="Migrations\202307120441571_CambiosImages2.designer.cs">
       <DependentUpon>202307120441571_CambiosImages2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202307122027201_NewChangeDB.cs" />
+    <Compile Include="Migrations\202307122027201_NewChangeDB.designer.cs">
+      <DependentUpon>202307122027201_NewChangeDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\EF\Cliente.cs" />
+    <Compile Include="Models\EF\Customer.cs" />
     <Compile Include="Models\EF\Image.cs" />
     <Compile Include="Models\EF\OMDbContext.cs" />
+    <Compile Include="Models\EF\Order.cs" />
+    <Compile Include="Models\EF\OrderItem.cs" />
     <Compile Include="Models\EF\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1098,6 +1108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202307120441571_CambiosImages2.resx">
       <DependentUpon>202307120441571_CambiosImages2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307122027201_NewChangeDB.resx">
+      <DependentUpon>202307122027201_NewChangeDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

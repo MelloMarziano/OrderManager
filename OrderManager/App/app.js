@@ -13,6 +13,10 @@
                  controller: 'productCtrl',
                  templateUrl: '/app/template/product-view.html',
              })
+                .when('/Customer', {
+                    controller: 'clientCtrl',
+                    templateUrl: '/app/template/client-page.html',
+                })
            
             .otherwise({ redirectTo: '/' });
     }]);

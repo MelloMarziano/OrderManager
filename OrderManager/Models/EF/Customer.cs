@@ -7,7 +7,7 @@ using System.Web;
 
 namespace OrderManager.Models.EF
 {
-    public class Cliente
+    public class Customer
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -20,5 +20,7 @@ namespace OrderManager.Models.EF
         [EmailAddress]
         public string Email { get; set; }
         public string Phone { get; set; }
+
+        public virtual List<Order> Orders { get; set; }
     }
 }

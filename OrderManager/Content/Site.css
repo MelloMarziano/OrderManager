@@ -42,3 +42,8 @@ ion-icon {
     cursor: pointer;
     margin-right:10px;
 }
+
+a{
+    text-decoration: none !important;
+    
+}
