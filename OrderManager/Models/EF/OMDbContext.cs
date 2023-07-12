@@ -20,6 +20,5 @@ namespace OrderManager.Models.EF
 
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Image> Images { get; set; }
     }
 }

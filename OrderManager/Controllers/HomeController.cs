@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using OrderManager.dto;
 
 namespace OrderManager.Controllers
 {
@@ -17,7 +19,6 @@ namespace OrderManager.Controllers
             db = new OMDbContext();
         }
         // GET: Home
-        // GET: Home
 
         public ActionResult Index()
         {
@@ -25,7 +26,17 @@ namespace OrderManager.Controllers
         }
         public JsonResult GetProductsStock()
         {
-            var productos = db.Products.Where(p => p.Stock < 5).ToList();
+            var productos = db.Products
+                .Where(x=> x.Stock < 5)
+       .Select(p => new ProductDTO
+       {
+           ProductId = p.Id,
+           ProductName = p.ProductName,
+           ProductDescription = p.ProductDescription,
+           Price = p.Price,
+           Stock = p.Stock,
+           Images = p.Images.Select(i => i.FilePath).ToList()
+       }).ToList();
             return Json(productos, JsonRequestBehavior.AllowGet);
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,8 +21,11 @@ namespace OrderManager.Models.EF
         public int Stock { get; set; }
         [Required]
         public decimal Price { get; set; }
-        [InverseProperty("Product")]
-        public List<Image> Images { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Image> Images
+        {
+            get; set;
 
+        }
     }
 }
