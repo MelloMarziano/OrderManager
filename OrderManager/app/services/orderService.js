@@ -50,7 +50,7 @@
             service.addOrder = function (CustomerId, OrderTracking, Items) {
                 console.log(CustomerId, OrderTracking, Items);
                 var deferred = $q.defer();
-                $http.post('/Order/saveOrder/', CustomerId, OrderTracking, Items).then(function () {
+                $http.post('/Order/saveOrder', CustomerId, OrderTracking, Items).then(function () {
                     deferred.resolve();
                 }, function () {
                     deferred.reject();
