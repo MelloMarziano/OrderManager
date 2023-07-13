@@ -13,10 +13,18 @@
                  controller: 'productCtrl',
                  templateUrl: '/app/template/product-view.html',
              })
-                .when('/Customer', {
-                    controller: 'clientCtrl',
-                    templateUrl: '/app/template/client-page.html',
-                })
+            .when('/Customer', {
+                 controller: 'clientCtrl',
+                 templateUrl: '/app/template/client-page.html',
+             })
+            .when('/Order', {
+                 controller: 'orderCtrl',
+                 templateUrl: '/app/template/order-view.html',
+            })
+            .when('/Order-detail/:id', {
+                 controller: 'orderDetailCtrl',
+                 templateUrl: '/app/template/order-detail.html',
+            })
            
             .otherwise({ redirectTo: '/' });
     }]);

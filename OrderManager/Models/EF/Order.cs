@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace OrderManager.Models.EF
 {
@@ -17,9 +18,9 @@ namespace OrderManager.Models.EF
 
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
-
+        [JsonIgnore]
         public virtual Customer Customer { get; set; }
-
+        [JsonIgnore]
         public virtual List<OrderItem> OrderItems { get; set; }
 
         public string OrderTracking { get; set; }

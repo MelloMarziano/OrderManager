@@ -44,17 +44,17 @@
                     </tbody>
                 </table>
             </div>
-
+            <br />
             <div class="row justify-content-between">
-                <div class="col-6">
+                <div class="col">
                     <div class="pull-left">
-                        <br />
+                        
                         <pre>Page: {{currentPage}}/{{numPages}}</pre>
                     </div>
                 </div>
-                <div class="col-6 align-self-end">
+                <div class="col text-right">
 
-                    <ul uib-pagination direction-links="false" total-items="data.length" items-per-page="itemsPerPage" max-size="5" ng-model="currentPage" num-pages="numPages"></ul>
+                    <ul class="pagination" uib-pagination direction-links="false" total-items="data.length" items-per-page="itemsPerPage" max-size="5" ng-model="currentPage" num-pages="numPages"></ul>
 
                 </div>
             </div>

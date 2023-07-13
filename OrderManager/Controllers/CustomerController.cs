@@ -1,4 +1,5 @@
-﻿using OrderManager.Models.EF;
+﻿using OrderManager.dto;
+using OrderManager.Models.EF;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -25,8 +26,15 @@ namespace OrderManager.Controllers
 
         public JsonResult GetClients()
         {
-            var clientes = db.Clientes.ToList();
-            return Json(clientes, JsonRequestBehavior.AllowGet);
+            var customers = db.Clientes.ToList();
+            var customerDTOs = customers.Select(c => new CustomerDTO
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Email = c.Email,
+                Phone = c.Phone
+            }).ToList();
+            return Json(customerDTOs, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

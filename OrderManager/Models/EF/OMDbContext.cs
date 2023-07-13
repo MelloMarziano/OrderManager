@@ -20,5 +20,8 @@ namespace OrderManager.Models.EF
 
         public DbSet<Customer> Clientes { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        
+
     }
 }

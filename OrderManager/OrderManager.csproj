@@ -101,13 +101,18 @@
     <Content Include="app\app.js" />
     <Content Include="app\controllers\clientCtrl.js" />
     <Content Include="app\controllers\homeCtrl.js" />
+    <Content Include="app\controllers\orderCtrl.js" />
+    <Content Include="app\controllers\orderDetailCtrl.js" />
     <Content Include="app\controllers\productCtrl.js" />
     <Content Include="app\services\clientService.js" />
+    <Content Include="app\services\dateFilter.js" />
     <Content Include="app\services\homeService.js" />
+    <Content Include="app\services\orderService.js" />
     <Content Include="app\services\productService.js" />
     <Content Include="app\template\client-page.html" />
     <Content Include="app\template\home-view.html" />
-    <Content Include="app\template\modalProduct.html" />
+    <Content Include="app\template\order-detail.html" />
+    <Content Include="app\template\order-view.html" />
     <Content Include="app\template\product-view.html" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -1020,7 +1025,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="dto\CustomerDTO.cs" />
+    <Compile Include="dto\OrderDTO.cs" />
+    <Compile Include="dto\OrderItemDTO.cs" />
     <Compile Include="dto\ProductDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1086,6 +1095,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Order\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
