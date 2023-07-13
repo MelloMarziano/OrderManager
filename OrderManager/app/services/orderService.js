@@ -36,6 +36,28 @@
                 });
                 return deferred.promise;
             };
+
+            service.getProducts = function () {
+                var deferred = $q.defer();
+                $http.get('/Product/GetProduct').then(function (result) {
+                    deferred.resolve(result.data);
+                }, function () {
+                    deferred.reject();
+                });
+                return deferred.promise;
+            };
+
+            service.addOrder = function (CustomerId, OrderTracking, Items) {
+                console.log(CustomerId, OrderTracking, Items);
+                var deferred = $q.defer();
+                $http.post('/Order/saveOrder/', CustomerId, OrderTracking, Items).then(function () {
+                    deferred.resolve();
+                }, function () {
+                    deferred.reject();
+                });
+                return deferred.promise;
+            };
+
             return service;
         }]);
 })();

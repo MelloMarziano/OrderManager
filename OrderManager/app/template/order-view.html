@@ -60,25 +60,59 @@
 
             <div class="modal-body">
                 <h3>{{modalTitle}}</h3>
-                <form ng-submit="submitClient(formBuilder)">
+                <form ng-submit="submitOrder(formBuilder)">
                     <input type="hidden" class="form-control" ng-model="formBuilder.Id" ng-disabled="disabledForm">
                     <div class="form-group">
                         <label>Nombre Cliente</label>
-                        <select class="form-control" ng-model="selectedCustomer" ng-options="customer.Id as customer.Name for customer in customers">
+                        <select class="form-control" ng-model="formBuilder.selectedCustomer" ng-options="customer.Id as customer.Name for customer in customers" ng-disabled="disabledCustomer">
                             <option value="" selected disabled>Seleccione un cliente</option>
                         </select>
                      </div>
                     <div class="form-group">
                         <label>Producto</label>
-                        <select class="form-control">
-                          <option>Camisa Replay</option>
-                          <option>Camisa Jack and Jones</option>
+                        <select class="form-control"  ng-model="formBuilder.selectedProducts" ng-options="product.ProductId as product.ProductName for product in products">
+                            <option value="" selected disabled>Seleccione un producto</option>
+                         
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Cantidad</label>
-                        <input type="number" class="form-control" ng-model="formBuilder.Phone" ng-disabled="disabledForm">
+                        <input type="number" class="form-control" ng-model="formBuilder.Quantity" ng-disabled="disabledForm">
                     </div>
+                    <br />
+                    <div class="row">
+                        <div class="col text-right">
+                            <a class="btn btn-primary" ng-click="addNewProduct(formBuilder)">Comprar mas</a>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col">
+                            <div class="table-responsive">
+                                <table  class="table table-striped table-bordered table-hover">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="i in forTable track by $index">
+                                            <td>{{i.ProductId}}</td>
+                                            <td>{{i.Name}}</td>
+                                            <td>{{i.Quantity}}</td>
+                                            <td>{{i.Price}}</td>
+                                            <td>{{i.Price * i.Quantity}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
                    
                     <br />
                     <div class="row justify-content-between">
