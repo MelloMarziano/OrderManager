@@ -31,6 +31,7 @@
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <tr ng-repeat="i in data track by $index">
 
@@ -39,15 +40,20 @@
                             <td>{{i.Customer.Name}}</td>
                             <td>
                                 <span ng-if="i.OrderTracking == 'Empacado'" class="badge badge-warning">Empacando</span>
+                                <span ng-if="i.OrderTracking == 'Vendido'" class="badge badge-secondary">Vendido</span>
+                                <span ng-if="i.OrderTracking == 'Cash'" class="badge badge-success">Cash</span>
+                                <span ng-if="i.OrderTracking == 'Fiao'" class="badge badge-danger">Fiao</span>
+                                <span ng-if="i.OrderTracking == 'Delivery'" class="badge badge-success">Delivery</span>
+                                <span ng-if="i.OrderTracking == 'Tarjeta'" class="badge badge-success">Tarjeta</span>
                             </td>
-                           
+
                             <td>{{i.OrderItems.length}}</td>
                             <td>
-                                <a  href="#/Order-detail/{{i.Id}}"><ion-icon size="small" class="text-primary" name="eye-outline"></ion-icon></a>
+                                <a href="#/Order-detail/{{i.Id}}"><ion-icon size="small" class="text-primary" name="eye-outline"></ion-icon></a>
                             </td>
                         </tr>
                     </tbody>
-                    
+
                 </table>
             </div>
         </div>
@@ -67,29 +73,39 @@
                         <select class="form-control" ng-model="formBuilder.selectedCustomer" ng-options="customer.Id as customer.Name for customer in customers" ng-disabled="disabledCustomer">
                             <option value="" selected disabled>Seleccione un cliente</option>
                         </select>
-                     </div>
+                    </div>
                     <div class="form-group">
                         <label>Producto</label>
-                        <select class="form-control"  ng-model="formBuilder.selectedProducts" ng-options="product.ProductId as product.ProductName for product in products">
+                        <select class="form-control" ng-model="formBuilder.selectedProducts" ng-options="product.ProductId as product.ProductName for product in products">
                             <option value="" selected disabled>Seleccione un producto</option>
-                         
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Cantidad</label>
                         <input type="number" class="form-control" ng-model="formBuilder.Quantity" ng-disabled="disabledForm">
                     </div>
+                    <div class="form-group">
+                        <label>Tipo venta (Tracking)</label>
+                       
+                        <select class="form-control" ng-model="formBuilder.OrderTracking" ng-disabled="disabledCustomer">
+                            <option value="" selected disabled>Seleccione un tipo</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Fiao">Fiao</option>
+                            <option value="Delivery">Delivery</option>
+                            <option value="Tarjeta">Tarjeta</option>
+                        </select>
+                    </div>
                     <br />
                     <div class="row">
                         <div class="col text-right">
-                            <a class="btn btn-primary" ng-click="addNewProduct(formBuilder)">Comprar mas</a>
+                            <a class="btn btn-primary" ng-click="addNewProduct(formBuilder)">Agregar al carrito</a>
                         </div>
                     </div>
                     <br />
                     <div class="row">
                         <div class="col">
                             <div class="table-responsive">
-                                <table  class="table table-striped table-bordered table-hover">
+                                <table class="table table-striped table-bordered table-hover">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>Codigo</th>
@@ -113,14 +129,14 @@
                         </div>
                     </div>
                     <br />
-                   
+
                     <br />
                     <div class="row justify-content-between">
                         <div class="col align-self-start">
-                            <a class="btn btn-block btn-danger" data-dismiss="modal">Close</a>
+                            <a class="btn btn-block btn-danger" ng-click="closeModal()">Close</a>
                         </div>
                         <div class="col align-self-end">
-                            <button type="submit" class="btn btn-block btn-success" ng-if="!disabledForm">Guardar</button>
+                            <button type="submit" class="btn btn-block btn-success" ng-disabled="forTable.length <= 0">Guardar</button>
                         </div>
                     </div>
                 </form>

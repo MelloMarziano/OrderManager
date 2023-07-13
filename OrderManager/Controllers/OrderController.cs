@@ -58,7 +58,7 @@ namespace OrderManager.Controllers
 
             return Json(orderDTOs, JsonRequestBehavior.AllowGet);
         }
-
+        
         public JsonResult GetOrderById(int id)
         {
             var order = db.Orders
@@ -95,15 +95,17 @@ namespace OrderManager.Controllers
                 return Json(null);
             }
         }
-
-        public JsonResult saveOrder(int CustomerId, string OrderTracking, List<OrderItem> items)
+        [HttpPost]
+        public JsonResult saveOrder(int? CustomerId, string OrderTracking, List<OrderItem> Items)
         {
+            
+
             Order order = new Order
             {
                 OrderDate = DateTime.Now,
-                CustomerId = CustomerId,
+                CustomerId = CustomerId ?? 1,
                 OrderTracking = OrderTracking,
-                OrderItems = items,
+                OrderItems = Items,
             };
 
             db.Orders.Add(order);

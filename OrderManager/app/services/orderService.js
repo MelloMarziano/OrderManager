@@ -6,10 +6,8 @@
             service.getOrders = function () {
                 var deferred = $q.defer();
                 $http.get('/Order/GetOrders').then(function (result) {
-                    console.log(result);
                     deferred.resolve(result.data);
                 }, function () {
-                    console.log('Error');
                     deferred.reject();
                 });
                 return deferred.promise;
@@ -18,10 +16,8 @@
             service.getOrderById = function (id) {
                 var deferred = $q.defer();
                 $http.get('/Order/GetOrderById/' + id).then(function (result) {
-                    console.log(result);
                     deferred.resolve(result.data);
                 }, function () {
-                    console.log('Error');
                     deferred.reject();
                 });
                 return deferred.promise;
@@ -48,9 +44,8 @@
             };
 
             service.addOrder = function (CustomerId, OrderTracking, Items) {
-                console.log(CustomerId, OrderTracking, Items);
                 var deferred = $q.defer();
-                $http.post('/Order/saveOrder', CustomerId, OrderTracking, Items).then(function () {
+                $http.post('/Order/saveOrder', { customerId: CustomerId, OrderTracking: OrderTracking, Items: Items }).then(function () {
                     deferred.resolve();
                 }, function () {
                     deferred.reject();
