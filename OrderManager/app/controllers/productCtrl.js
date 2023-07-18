@@ -1,7 +1,7 @@
 ﻿(function () {
         'use strict'
     angular.module('app')
-        .controller('productCtrl', ['$scope', '$location', 'productService', function ($scope, $location, productService ) {
+        .controller('productCtrl', ['$scope', 'productService', function ($scope, productService ) {
             $scope.title = "Listado de productos";
             $scope.disabledForm = false;
             $scope.data = [];
@@ -33,7 +33,6 @@
                     default:
                         $scope.typeSubmit = "";
                 }
-                console.log(producto);
             }
 
             $scope.openForEdit = function (producto) {

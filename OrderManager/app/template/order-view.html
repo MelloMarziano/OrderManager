@@ -39,12 +39,10 @@
                             <td>{{i.OrderDate | dateFromJson }}</td>
                             <td>{{i.Customer.Name}}</td>
                             <td>
-                                <span ng-if="i.OrderTracking == 'Empacado'" class="badge badge-warning">Empacando</span>
-                                <span ng-if="i.OrderTracking == 'Vendido'" class="badge badge-secondary">Vendido</span>
-                                <span ng-if="i.OrderTracking == 'Cash'" class="badge badge-success">Cash</span>
-                                <span ng-if="i.OrderTracking == 'Fiao'" class="badge badge-danger">Fiao</span>
-                                <span ng-if="i.OrderTracking == 'Delivery'" class="badge badge-success">Delivery</span>
-                                <span ng-if="i.OrderTracking == 'Tarjeta'" class="badge badge-success">Tarjeta</span>
+                                <span ng-if="i.OrderTracking == 'Ordenado'" class="badge badge-warning">Ordenado</span>
+                                <span ng-if="i.OrderTracking == 'Empacado'" class="badge badge-secondary">Empacado</span>
+                                <span ng-if="i.OrderTracking == 'Enviado'" class="badge badge-success">Enviado</span>
+                                <span ng-if="i.OrderTracking == 'Entregado'" class="badge badge-danger">Entregado</span>
                             </td>
 
                             <td>{{i.OrderItems.length}}</td>
@@ -83,18 +81,7 @@
                     <div class="form-group">
                         <label>Cantidad</label>
                         <input type="number" class="form-control" ng-model="formBuilder.Quantity" ng-disabled="disabledForm">
-                    </div>
-                    <div class="form-group">
-                        <label>Tipo venta (Tracking)</label>
-                       
-                        <select class="form-control" ng-model="formBuilder.OrderTracking" ng-disabled="disabledCustomer">
-                            <option value="" selected disabled>Seleccione un tipo</option>
-                            <option value="Cash">Cash</option>
-                            <option value="Fiao">Fiao</option>
-                            <option value="Delivery">Delivery</option>
-                            <option value="Tarjeta">Tarjeta</option>
-                        </select>
-                    </div>
+                    </div>                   
                     <br />
                     <div class="row">
                         <div class="col text-right">

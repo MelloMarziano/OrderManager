@@ -53,6 +53,16 @@
                 return deferred.promise;
             };
 
+            service.orderTrackingUpdate = function (id, OrderTracking) {
+                var deferred = $q.defer();
+                $http.post('/Order/updateOrderTracking', { orderId: id, newTracking:OrderTracking }).then(function () {
+                    deferred.resolve();
+                }, function () {
+                    deferred.reject();
+                });
+                return deferred.promise;
+            };
+
             return service;
         }]);
 })();

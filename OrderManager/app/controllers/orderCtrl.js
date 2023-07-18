@@ -22,13 +22,15 @@
             function getCustomers() {
                 orderService.getCustomer().then(function (result) {
                     $scope.customers = result;
-                    console.log(result);
                 });
             };
             getProducts()
             function getProducts() {
                 orderService.getProducts().then(function (result) {
-                    $scope.products = result;
+                    var products = result.filter(function (producto) {
+                        return producto.Stock > 0
+                    });
+                    $scope.products = products;
                 });
             }
             $scope.closeModal = function () {
@@ -55,7 +57,7 @@
 
             $scope.submitOrder = function (formBuilder) {
                 const CustomerId = $scope.formBuilder.selectedCustomer;
-                const OrderTracking = $scope.formBuilder.OrderTracking;
+                const OrderTracking = 'Ordenado';
                 const Items = $scope.forTable;
 
                 orderService.addOrder(CustomerId, OrderTracking, Items).then(function () {
@@ -66,9 +68,5 @@
                     toastr.error('Error in creating Order');
                 });
             }
-
-            $scope.createOrder = function (product) {
-                
-            };
         }])
 })();

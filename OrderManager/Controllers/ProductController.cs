@@ -83,5 +83,17 @@ namespace OrderManager.Controllers
             return Json(null);
         }
 
+        public JsonResult EditStock(int id, int newValue)
+        {
+            var product = db.Products.Find(id);
+            if(product != null)
+            {
+                product.Stock = product.Stock - newValue;
+                db.SaveChanges();
+            }
+
+            return Json(null);
+        }
+
     }
 }

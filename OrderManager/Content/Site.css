@@ -57,3 +57,17 @@ ul > .pagination > li {
     padding: 2px 5px;
     border-radius: 5px;
 }
+
+.order-tracking{
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+}
+
+.order-type{
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items:center;
+}

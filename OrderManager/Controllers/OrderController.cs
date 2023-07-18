@@ -113,5 +113,20 @@ namespace OrderManager.Controllers
 
             return Json(null);
         }
+
+        [HttpPost]
+
+        public JsonResult updateOrderTracking(int orderId, string newTracking)
+        {
+            var order = db.Orders.Find(orderId);
+
+            if(order != null)
+            {
+                order.OrderTracking = newTracking;
+                db.SaveChanges();
+            }
+
+            return Json(null);
+        }
     }
 }

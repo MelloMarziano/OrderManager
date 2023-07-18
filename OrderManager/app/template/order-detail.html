@@ -5,8 +5,23 @@
             <h2>Cliente: <small>{{data.Customer.Name}}</small></h2>
             <h2>Cantidad: <small>{{data.OrderItems.length}}</small></h2>
             <h2>Total: <small>200.00</small></h2>
-            <h2>Tracking Status: <span class="badge badge-info">{{data.OrderTracking}}</span></h2>
+            <h2>Tracking Status:</h2>
+            <div class="order-tracking">
+                <div class="progress" style="background-color: #C1C1C1; margin-bottom: 5px;">
+                    <div class="progress-bar bg-info" ng-style="{ 'width': orderTrackingValue + '%' }" role="progressbar" aria-valuenow={{orderTrackingValue}} aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="order-type">
+                    <span>Ordenado</span>
+                    <span>Empacado</span>
+                    <span>Enviado</span>
+                    <span>Entregado</span>
+                </div>
+            </div>
+            <br />
             <div class="row justify-content-between">
+                <div class="col text-left" ng-show="data.OrderTracking !== 'Entregado'">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"  ng-click="openModal()">Cambiar tracking</button>
+                </div>
                 <div class="col text-right">
                     <a href="#/Order" class="btn btn-secondary"><ion-icon size="small" name="home-outline"></ion-icon> Volver a orden</a>
                 </div>
@@ -39,6 +54,43 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <h3>{{modalTitle}}</h3>
+                <form ng-submit="submitOrder(formBuilder)">
+                    <div class="form-group">
+                        <label>Producto</label>
+                        <select class="form-control" ng-model="formBuilder.OrderTracking">
+                            <option value="" selected disabled>Seleccione un estado</option>
+                            <option value="Ordenado">Ordenado</option>
+                            <option value="Empacado">Empacado</option>
+                            <option value="Enviado">Enviado</option>
+                            <option value="Entregado">Entregado</option>
+                        </select>
+                    </div>
+                    
+                    
+
+                    <br />
+                    <div class="row justify-content-between">
+                        <div class="col align-self-start">
+                            <a class="btn btn-block btn-danger" data-dismiss="modal">Close</a>
+                        </div>
+                        <div class="col align-self-end">
+                            <button type="submit" class="btn btn-block btn-success">Cambiar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
         </div>
     </div>
 </div>
